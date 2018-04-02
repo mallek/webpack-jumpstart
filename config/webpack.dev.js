@@ -2,7 +2,9 @@ const path = require("path")
 
 module.exports = {
     entry: {
-        main: "./src/main.js"
+        main: ["core-js/fn/promise",
+            "./src/main.js"
+        ]
     },
     mode: "development",
     output: {
@@ -16,6 +18,13 @@ module.exports = {
     },
     module: {
         rules: [{
+                test: /\.js$/,
+                use: [{
+                    loader: "babel-loader"
+                }],
+                exclude: /node_modules/
+            },
+            {
                 test: /\.css$/,
                 use: [{
                         loader: "style-loader"
