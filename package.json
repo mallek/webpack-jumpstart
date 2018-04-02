@@ -7,7 +7,7 @@
         "start": "webpack-dev-server -d --config config/webpack.dev.js --progress --colors",
         "build": "webpack --config config/webpack.dev.js --progress --colors",
         "babel": "babel src/main.js",
-        "dev": "nodemon --watch config --watch src/server src/server/main.js"
+        "dev": "nodemon --inspect --watch config --watch src/server src/server/main.js"
     },
     "keywords": [],
     "author": "",
