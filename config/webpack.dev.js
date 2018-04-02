@@ -2,9 +2,7 @@ const path = require("path")
 
 module.exports = {
     entry: {
-        main: ["core-js/fn/promise",
-            "./src/main.js"
-        ]
+        main: ["./src/main.js"]
     },
     mode: "development",
     output: {
