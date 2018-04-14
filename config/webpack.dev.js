@@ -63,7 +63,8 @@ module.exports = {
         new webpack.HotModuleReplacementPlugin(),
         new webpack.NamedModulesPlugin(),
         new HTMLWebpackPlugin({
-            template: "./src/index.html"
+            template: "./src/index.ejs",
+            title: "Nice Tree!"
         })
     ]
 
