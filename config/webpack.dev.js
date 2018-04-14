@@ -56,6 +56,15 @@ module.exports = {
                         name: "images/[name]-[hash:32].[ext]"
                     }
                 }]
+            },
+            {
+                test: /\.hbs$/,
+                use: [{
+                    loader: "handlebars-loader",
+                    query: {
+                        inlineRequires: "/images/"
+                    }
+                }]
             }
         ]
     },
@@ -63,7 +72,7 @@ module.exports = {
         new webpack.HotModuleReplacementPlugin(),
         new webpack.NamedModulesPlugin(),
         new HTMLWebpackPlugin({
-            template: "./src/index.ejs",
+            template: "./src/index.hbs",
             title: "Nice Tree!"
         })
     ]
