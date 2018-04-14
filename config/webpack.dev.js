@@ -40,6 +40,22 @@ module.exports = {
                 ]
             },
             {
+                test: /\.sass$/,
+                use: [{
+                        loader: "style-loader"
+                    },
+                    {
+                        loader: "css-loader"
+                    },
+                    {
+                        loader: "postcss-loader"
+                    },
+                    {
+                        loader: "sass-loader"
+                    }
+                ]
+            },
+            {
                 test: /\.html$/,
                 use: [{
                     loader: "html-loader",
