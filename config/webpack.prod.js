@@ -1,36 +1,24 @@
 const path = require("path")
 const webpack = require("webpack")
 const HTMLWebpackPlugin = require("html-webpack-plugin")
+const MiniCSSExtractPlugin = require("mini-css-extract-plugin")
+const isProd = process.env.NODE_ENV === "production"
 
 module.exports = {
     entry: {
-        main: [
-            "babel-runtime/regenerator",
-            "webpack-hot-middleware/client?reload=true",
-            "./src/main"
-        ],
+        main: ["./src/main"],
         polyfills: ["./src/angular-polyfills"],
         angular: ["./src/angular"],
     },
     resolve: {
         extensions: [".js", ".ts"]
     },
-    mode: "development",
+    mode: "production",
     output: {
         filename: "[name]-bundle.js",
         path: path.resolve(__dirname, "../dist"),
         publicPath: "/"
     },
-    devServer: {
-        contentBase: "dist",
-        historyApiFallback: true,
-        overlay: true,
-        hot: true,
-        stats: {
-            colors: true
-        }
-    },
-    devtool: "source-map",
     module: {
         rules: [
             {
@@ -50,7 +38,7 @@ module.exports = {
             {
                 test: /\.css$/,
                 use: [{
-                        loader: "style-loader"
+                        loader: MiniCSSExtractPlugin.loader
                     },
                     {
                         loader: "css-loader"
@@ -78,7 +66,9 @@ module.exports = {
         ]
     },
     plugins: [
-        new webpack.HotModuleReplacementPlugin(),
+        new MiniCSSExtractPlugin({
+            filename: "[name]-[contenthash].css"
+        }),
         new webpack.NamedModulesPlugin(),
         new webpack.ContextReplacementPlugin(
             /angular(\\|\/)core/,
@@ -87,6 +77,11 @@ module.exports = {
         ),
         new HTMLWebpackPlugin({
             template: "./src/index.html"
+        }),
+        new webpack.DefinePlugin({
+            'process.env': {
+                 'NODE_ENV': JSON.stringify("production")
+             }
         })
     ]
 
