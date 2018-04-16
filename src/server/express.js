@@ -23,6 +23,7 @@ const staticMiddleware = express.static("dist")
 
 server.use(staticMiddleware)
 
-server.listen(8080, () => {
-    console.log("Server is listening")
+const PORT = process.env.PORT || 8080
+server.listen(PORT, () => {
+  console.log(`Server listening on http://localhost:${PORT}`)
 })
